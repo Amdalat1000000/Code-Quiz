@@ -3,6 +3,7 @@ var startBtn = document.getElementById("start");
 var startScreen = document.getElementById("start-screen");
 var quizScreen = document.getElementById("questions");
 var feedback = document.getElementById("feedback");
+var clearBtn = document.getElementById("clear");
 
 var timeRemaining = 60;
 var currentQuestionIndex = 0;
@@ -19,7 +20,7 @@ var questionList = [
     },
 ]
 
-startBtn.addEventListener("click", startQuiz);
+// startBtn.addEventListener("click", startQuiz);
 
 function checkAnswer(event) {
     var selectedChoice = event.target.textContent;
@@ -115,5 +116,20 @@ function submitInitials() {
     location.replace("./highscores.html")
 }
 
-document.getElementById("submit").addEventListener("click", submitInitials)
+// document.getElementById("submit").addEventListener("click", submitInitials);
+if (startBtn !== null) {
+    document.getElementById("submit").addEventListener("click", submitInitials);
+    startBtn.addEventListener("click", startQuiz);
+  }
+var highscoresDiv = document.getElementById("highscores");
+if (highscoresDiv !== null) {
+    highscoresDiv.textContent = JSON.parse(localStorage.getItem("highscores"));
+  }
+  
+function clearLocalStorage() {
+    window.localStorage.removeItem("highscores");
+  }
+if (clearBtn !== null) {
+    clearBtn.addEventListener("click", clearLocalStorage);
+  }
 startBtn.addEventListener("click", startQuiz)
